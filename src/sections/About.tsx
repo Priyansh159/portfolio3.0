@@ -39,13 +39,6 @@ export default function About() {
   significantly improving efficiency, transparency, and tracking.
 </p>
 
-<p className="text-muted text-sm sm:text-base leading-relaxed mb-5">
-  The platform handles a multi-level approval hierarchy including Junior Clerk,
-  Cooperative Officer Marketing, District Registrar, Senior Clerk, HOS, Deputy
-  Director, and Director, along with multiple modules such as Contract Farming,
-  MIS Data Input, GCA, Trader Module, Panel Management, and Schemes.
-</p>
-
 <p className="text-muted text-sm sm:text-base leading-relaxed mb-8">
   My role involves frontend development using React & TypeScript, API
   integration, state management, UI/UX enhancements, and performance
