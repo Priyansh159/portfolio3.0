@@ -20,27 +20,38 @@ export default function About() {
         {/* Left — bio */}
         <div>
           <p className="text-muted text-sm sm:text-base leading-relaxed mb-5">
-            I'm a passionate Full Stack Developer with about a year of
-            professional experience, currently working as an{' '}
-            <strong className="text-green font-semibold">
-              SDE-1 at Sai Computers Limited
-            </strong>
-            . I specialize in building modern, scalable, and user-centric web
-            applications using React, Node.js, MongoDB, Express.js, and
-            TypeScript.
-          </p>
-          <p className="text-muted text-sm sm:text-base leading-relaxed mb-5">
-            Currently pursuing my graduation from{' '}
-            <strong className="text-white font-semibold">MIET, Meerut</strong>.
-            I enjoy solving real-world problems with clean, efficient code and
-            collaborating closely with cross-functional teams to turn ideas into
-            impactful products.
-          </p>
-          <p className="text-muted text-sm sm:text-base leading-relaxed mb-8">
-            Strong focus on performance optimization, responsive design, and
-            user experience. Always learning and staying updated with the
-            latest in tech and dev best practices.
-          </p>
+  I'm a passionate Full Stack Developer currently working as an{' '}
+  <strong className="text-green font-semibold">
+    Software Development Engineer – I (SDE-1) at Sai Computers Limited (SCL), Meerut
+  </strong>
+  , since June 2025. I specialize in building scalable and user-centric web
+  applications using React, TypeScript, Node.js, Express.js, and MongoDB.
+</p>
+
+<p className="text-muted text-sm sm:text-base leading-relaxed mb-5">
+  Currently, I am contributing to{' '}
+  <strong className="text-white font-semibold">
+    DAMRF – Government of Gujarat
+  </strong>{' '}
+  (Feb 2025 – Jan 2026), a large-scale digital transformation project for APMC
+  (Agricultural Produce Market Committees). The system replaces traditional
+  paper-based workflows with a fully online approval and verification process,
+  significantly improving efficiency, transparency, and tracking.
+</p>
+
+<p className="text-muted text-sm sm:text-base leading-relaxed mb-5">
+  The platform handles a multi-level approval hierarchy including Junior Clerk,
+  Cooperative Officer Marketing, District Registrar, Senior Clerk, HOS, Deputy
+  Director, and Director, along with multiple modules such as Contract Farming,
+  MIS Data Input, GCA, Trader Module, Panel Management, and Schemes.
+</p>
+
+<p className="text-muted text-sm sm:text-base leading-relaxed mb-8">
+  My role involves frontend development using React & TypeScript, API
+  integration, state management, UI/UX enhancements, and performance
+  optimization. I also collaborate closely with backend teams to ensure smooth
+  system integration and deliver high-quality solutions.
+</p>
 
           <div className="flex flex-wrap gap-2">
             {TRAITS.map((t) => (
