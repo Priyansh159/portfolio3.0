@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Mail, Github, Linkedin, Code2, Twitter, Send } from 'lucide-react'
+import { Mail, Github, Linkedin, Code2, Twitter, Send, Loader2 } from 'lucide-react'
 import SectionLabel from '@/components/SectionLabel'
 import { useInView } from '@/hooks/useInView'
 import { SOCIAL_LINKS } from '@/data'
@@ -12,16 +12,43 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   twitter: <Twitter size={16} />,
 }
 
+type FormStatus = 'idle' | 'submitting' | 'success' | 'error'
+
+// Encode form data as URL-encoded string for Netlify Forms
+function encode(data: Record<string, string>) {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&')
+}
+
 export default function Contact() {
   const [ref, inView] = useInView<HTMLDivElement>(0.1)
   const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState<FormStatus>('idle')
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 4000)
-    setForm({ name: '', email: '', message: '' })
+    setStatus('submitting')
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({
+          'form-name': 'contact',
+          ...form,
+        }),
+      })
+
+      if (!response.ok) throw new Error('Network response was not ok')
+
+      setStatus('success')
+      setForm({ name: '', email: '', message: '' })
+      setTimeout(() => setStatus('idle'), 5000)
+    } catch {
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 5000)
+    }
   }
 
   return (
@@ -73,18 +100,43 @@ export default function Contact() {
             Send a Message
           </h3>
 
-          {submitted ? (
+          {status === 'success' ? (
             <div className="flex flex-col items-center justify-center h-48 gap-3">
               <div className="w-12 h-12 rounded-full bg-green-dim border border-green/30 flex items-center justify-center">
                 <span className="text-green text-xl">✓</span>
               </div>
-              <p className="font-mono text-green text-sm">Message sent!</p>
+              <p className="font-mono text-green text-sm">Message sent successfully!</p>
               <p className="text-muted text-xs text-center">
-                This is a demo form. Reach me directly at priyanshrana159@gmail.com
+                Thanks for reaching out! I'll get back to you soon.
+              </p>
+            </div>
+          ) : status === 'error' ? (
+            <div className="flex flex-col items-center justify-center h-48 gap-3">
+              <div className="w-12 h-12 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center">
+                <span className="text-red-400 text-xl">✕</span>
+              </div>
+              <p className="font-mono text-red-400 text-sm">Something went wrong</p>
+              <p className="text-muted text-xs text-center">
+                Please try again or email me directly at priyanshrana159@gmail.com
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <form
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-4"
+            >
+              {/* Hidden inputs for Netlify */}
+              <input type="hidden" name="form-name" value="contact" />
+              <p className="hidden">
+                <label>
+                  Don't fill this out if you're human: <input name="bot-field" />
+                </label>
+              </p>
+
               {(['name', 'email'] as const).map((field) => (
                 <div key={field}>
                   <label className="block font-mono text-xs text-muted mb-1.5 capitalize">
@@ -92,6 +144,7 @@ export default function Contact() {
                   </label>
                   <input
                     type={field === 'email' ? 'email' : 'text'}
+                    name={field}
                     placeholder={field === 'email' ? 'you@example.com' : 'Your name'}
                     value={form[field]}
                     onChange={(e) =>
@@ -108,6 +161,7 @@ export default function Contact() {
                 </label>
                 <textarea
                   rows={4}
+                  name="message"
                   placeholder="Say hi, propose a project, or just connect..."
                   value={form.message}
                   onChange={(e) =>
@@ -119,9 +173,17 @@ export default function Contact() {
               </div>
               <button
                 type="submit"
-                className="w-full py-3 bg-green text-bg font-bold font-mono text-sm rounded-lg hover:bg-green-dark transition-colors duration-200 active:scale-[0.98]"
+                disabled={status === 'submitting'}
+                className="w-full py-3 bg-green text-bg font-bold font-mono text-sm rounded-lg hover:bg-green-dark transition-colors duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                Send Message →
+                {status === 'submitting' ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  'Send Message →'
+                )}
               </button>
             </form>
           )}
@@ -130,3 +192,4 @@ export default function Contact() {
     </section>
   )
 }
+
