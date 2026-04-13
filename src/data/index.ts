@@ -61,7 +61,7 @@ export const PROJECTS: Project[] = [
     title: 'Meghalaya Line Survey',
     tag: 'React Native App',
     desc: 'Offline-first HT line survey app with survey creation, pole/transformer capture via camera + AR + GPS, local SQLite storage, and offline SVG map + SLD visualization. Includes validation, reporting, and Android (Kotlin/ARCore) integration for depth and sensors.',
-    github: 'https://github.com/Priyansh159/ht-line_survey',
+    github: 'https://github.com/Priyansh159/ht-line_survey.git',
     live: null,
     color: '#0d9488',
     tech: [
@@ -80,7 +80,7 @@ export const PROJECTS: Project[] = [
     title: 'AP World Tourism',
     tag: 'Frontend / Production',
     desc: 'Live tourism website featuring travel packages, destination highlights, and booking interactions. Designed for performance, responsiveness, and real-world client usage.',
-    github: null,
+    github: 'https://github.com/Priyansh159/apWorld.git',
     live: 'https://www.apworldtourism.in/',
     color: '#ff9f43',
     tech: ['React', 'JavaScript', 'CSS', 'Vercel', 'Responsive Design'],
