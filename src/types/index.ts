@@ -2,7 +2,7 @@ export interface Project {
   title: string
   tag: string
   desc: string
-  github: string
+  github: string | null
   live: string | null
   color: string
   tech: string[]
