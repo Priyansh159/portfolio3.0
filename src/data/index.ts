@@ -14,12 +14,12 @@ export const SKILLS: Skill[] = [
   { name: 'JavaScript', pct: 80, color: '#f7df1e' },
   { name: 'React.js', pct: 80, color: '#61dafb' },
   { name: 'TypeScript', pct: 75, color: '#3178c6' },
+  { name: 'Git/Github', pct: 80, color: '#2dba4e' },
   { name: 'Node.js', pct: 75, color: '#68a063' },
   { name: 'Express.js', pct: 75, color: '#999999' },
   { name: 'MongoDB', pct: 70, color: '#4ea94b' },
   { name: 'PostgreSQL', pct: 65, color: '#4169e1' },
   { name: 'Python', pct: 80, color: '#ffd43b' },
-  { name: 'TensorFlow / Keras', pct: 60, color: '#ff6f00' },
 ]
 
 export const TECH_TAGS: string[] = [
