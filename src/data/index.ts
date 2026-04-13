@@ -91,5 +91,4 @@ export const QUICK_FACTS: [string, string][] = [
   ['Experience', '~1 Year Professional'],
   ['Current Role', 'SDE-1 @ Sai Computers'],
   ['LeetCode', '100+ Problems Solved'],
-  ['Availability', 'Open to Opportunities'],
 ]
