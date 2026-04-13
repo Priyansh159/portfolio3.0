@@ -31,7 +31,7 @@ export const TECH_TAGS: string[] = [
 export const EXPERIENCES: Experience[] = [
   {
     role: 'SDE-1',
-    company: 'Sai Computers Limited',
+    company: 'Sai Computers Limited (SCL)',
     period: 'August 2025 – Present · ~1 year',
     type: 'Full-time',
     desc: 'Building and maintaining full-stack web applications in production. Working with React, Node.js, MongoDB, and TypeScript to deliver scalable features. Collaborating closely with cross-functional teams on architecture decisions, code reviews, and performance optimization.',
@@ -39,7 +39,7 @@ export const EXPERIENCES: Experience[] = [
   },
   {
     role: 'Full-Stack Developer Intern',
-    company: 'Sai Computers Limited',
+    company: 'Sai Computers Limited (SCL)',
     period: 'June 2025 – July 2025 · 2 months',
     type: 'Internship',
     desc: 'Developed and shipped multiple features across the full stack. Gained hands-on experience with production codebases, REST API design, and modern React patterns. Transitioned to a full-time role based on performance.',
@@ -50,7 +50,7 @@ export const EXPERIENCES: Experience[] = [
 export const PROJECTS: Project[] = [
   {
     title: 'APMC GAMRF (GIL)',
-    tag: 'Enterprise / Full Stack',
+    tag: 'Full Stack / Production (SCL)',
     desc: 'Enterprise-grade system for APMC operations under GIL. Handles registry workflows, data management, reporting, and role-based access with scalable architecture.',
     github: null,
     live: 'https://uat-eapmc.thesaicomputers.com/',
@@ -59,7 +59,7 @@ export const PROJECTS: Project[] = [
   },
   {
     title: 'Meghalaya Line Survey',
-    tag: 'React Native App',
+    tag: 'React Native App (SCL)',
     desc: 'Offline-first HT line survey app with survey creation, pole/transformer capture via camera + AR + GPS, local SQLite storage, and offline SVG map + SLD visualization. Includes validation, reporting, and Android (Kotlin/ARCore) integration for depth and sensors.',
     github: 'https://github.com/Priyansh159/ht-line_survey.git',
     live: null,
@@ -78,7 +78,7 @@ export const PROJECTS: Project[] = [
   },
   {
     title: 'AP World Tourism',
-    tag: 'Frontend / Production',
+    tag: 'Frontend / Production (Freelancing)',
     desc: 'Live tourism website featuring travel packages, destination highlights, and booking interactions. Designed for performance, responsiveness, and real-world client usage.',
     github: 'https://github.com/Priyansh159/apWorld.git',
     live: 'https://www.apworldtourism.in/',
