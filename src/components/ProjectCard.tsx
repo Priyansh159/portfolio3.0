@@ -57,16 +57,22 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       {/* Links */}
       <div className="flex gap-2 sm:gap-3 pt-1">
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noreferrer"
-          className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border font-mono text-xs transition-all duration-200 hover:bg-white/5"
-          style={{ borderColor: `${project.color}44`, color: project.color }}
-        >
-          <Github size={12} />
-          GitHub
-        </a>
+       {project.github ? (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border font-mono text-xs transition-all duration-200 hover:bg-white/5"
+            style={{ borderColor: `${project.color}44`, color: project.color }}
+          >
+            <Github size={12} />
+            GitHub
+          </a>
+        ) : (
+          <span className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-mono text-xs border border-border text-muted/50">
+            Private Repo
+          </span>
+        )}
         {project.live ? (
           <a
             href={project.live}
