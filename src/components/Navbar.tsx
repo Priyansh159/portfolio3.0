@@ -44,9 +44,10 @@ export default function Navbar() {
           </button>
         ))}
         <a
-          href="https://drive.google.com/file/d/1aIEJf1MIiAxCjwQwiq22IezZQC1F3TUG/view?usp=sharing"
+          href="/PriyanshRanaResume.pdf"
           target="_blank"
           rel="noreferrer"
+          download
           className="font-mono text-xs px-4 py-2 border border-green/40 text-green rounded-lg hover:bg-green/10 transition-colors duration-200"
         >
           Resume ↗
@@ -77,9 +78,10 @@ export default function Navbar() {
             </button>
           ))}
           <a
-            href="https://drive.google.com/file/d/1f6I2Nx9RKFRWpwoQtuwb1C6L_Ma0Fauw/view?usp=sharing"
+            href="/PriyanshRanaResume.pdf"
             target="_blank"
             rel="noreferrer"
+            download
             className="font-mono text-sm text-green"
           >
             Resume ↗

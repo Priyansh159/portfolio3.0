@@ -29,7 +29,7 @@ export default function Projects() {
             rel="noreferrer"
             className="inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 border border-border text-muted font-mono text-xs sm:text-sm rounded-xl hover:border-green/40 hover:text-green transition-all duration-200"
           >
-            View all on GitHub ↗
+            View more on GitHub ↗
           </a>
         </div>
       </div>

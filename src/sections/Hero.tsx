@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import HeroCanvas from '@/components/HeroCanvas'
 
-const TAGS = ['React', 'TypeScript', 'Node.js', 'MongoDB']
+const TAGS = ['React', 'TypeScript', 'Node.js', 'PostgreSQL']
 
 export default function Hero() {
   const [visible, setVisible] = useState(false)

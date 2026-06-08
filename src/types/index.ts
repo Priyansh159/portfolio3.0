@@ -6,6 +6,7 @@ export interface Project {
   live: string | null
   color: string
   tech: string[]
+  inProgress?: boolean
 }
 
 export interface Skill {
