@@ -6,11 +6,9 @@ const TRAITS = ['Problem Solver', 'Clean Code', 'Team Player', 'Continuous Learn
 
 export default function About() {
   const [ref, inView] = useInView<HTMLDivElement>(0.15)
-
   return (
     <section id="about" className="py-20 sm:py-24 max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
       <SectionLabel index={1} label="About Me" />
-
       <div
         ref={ref}
         className={`grid md:grid-cols-2 gap-10 md:gap-14 items-start transition-all duration-700 ${
@@ -20,32 +18,33 @@ export default function About() {
         {/* Left — bio */}
         <div>
           <p className="text-muted text-sm sm:text-base leading-relaxed mb-5">
-  I'm a passionate Full Stack Developer currently working as an{' '}
+  I'm a Full Stack Developer working as a{' '}
   <strong className="text-green font-semibold">
-    Software Development Engineer – I (SDE-1) at Sai Computers Limited (SCL), Meerut
+    Software Development Engineer – I (SDE-1) at SAI Computers Private Limited, Meerut
   </strong>
-  , since June 2025. I specialize in building scalable and user-centric web
-  applications using React, TypeScript, Node.js, Express.js, and MongoDB.
+  , since June 2025. I build scalable, user-centric web and mobile
+  applications using React, TypeScript, Node.js, Express.js, and PostgreSQL.
 </p>
-
 <p className="text-muted text-sm sm:text-base leading-relaxed mb-5">
-  Currently, I am contributing to{' '}
+  Currently, I'm building{' '}
+  <strong className="text-white font-semibold">
+    SMRITI 3.0
+  </strong>{' '}
+  (Apr 2026 – Present), an analytics platform for UP power distribution
+  companies (PVVNL, DVVNL, UPCL). I work across the stack — building dashboards
+  and reporting modules in React/TypeScript alongside Node.js APIs, with secure
+  authentication, role-based access control, and multi-tenant architecture.
+</p>
+<p className="text-muted text-sm sm:text-base leading-relaxed mb-8">
+  Previously, I delivered end-to-end features for{' '}
   <strong className="text-white font-semibold">
     DAMRF – Government of Gujarat
   </strong>{' '}
-  (Feb 2025 – Jan 2026), a large-scale digital transformation project for APMC
-  (Agricultural Produce Market Committees). The system replaces traditional
-  paper-based workflows with a fully online approval and verification process,
-  significantly improving efficiency, transparency, and tracking.
+  (a large-scale APMC digitalization project) and designed the system
+  architecture and Kafka-based data pipeline for an OCR platform (TPSODL,
+  Odisha). I focus on RBAC, REST API design, performance, and shipping clean,
+  maintainable solutions in close collaboration with backend and product teams.
 </p>
-
-<p className="text-muted text-sm sm:text-base leading-relaxed mb-8">
-  My role involves frontend development using React & TypeScript, API
-  integration, state management, UI/UX enhancements, and performance
-  optimization. I also collaborate closely with backend teams to ensure smooth
-  system integration and deliver high-quality solutions.
-</p>
-
           <div className="flex flex-wrap gap-2">
             {TRAITS.map((t) => (
               <span
@@ -57,7 +56,6 @@ export default function About() {
             ))}
           </div>
         </div>
-
         {/* Right — quick facts card */}
         <div className="bg-surface border border-border rounded-2xl p-5 sm:p-7">
           <h3 className="font-mono text-sm text-green font-bold mb-5 flex items-center gap-2">
