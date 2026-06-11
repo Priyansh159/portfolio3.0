@@ -39,11 +39,14 @@ export default function About() {
   Previously, I delivered end-to-end features for{' '}
   <strong className="text-white font-semibold">
     DAMRF – Government of Gujarat
-  </strong>{' '}
-  (a large-scale APMC digitalization project) and designed the system
-  architecture and Kafka-based data pipeline for an OCR platform (TPSODL,
-  Odisha). I focus on RBAC, REST API design, performance, and shipping clean,
-  maintainable solutions in close collaboration with backend and product teams.
+  </strong>
+  , a large-scale APMC digitalization project that replaced paper-based
+  workflows with a fully online approval and verification system. Beyond
+  client work, I build personal projects and take on freelance development —
+  exploring mobile apps, IoT, and side tools that push me to learn outside my
+  day-to-day stack. I focus on RBAC, REST API design, performance, and shipping
+  clean, maintainable solutions in close collaboration with backend and product
+  teams.
 </p>
           <div className="flex flex-wrap gap-2">
             {TRAITS.map((t) => (
