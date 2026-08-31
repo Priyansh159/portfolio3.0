@@ -57,7 +57,7 @@ export default function HeroWindows() {
           className="absolute right-0 top-0 w-[58%] aspect-[4/3] rotate-3"
         >
           <BrowserFrame className="w-full h-full shadow-2xl shadow-black/50">
-            <img src="/projects/tournament.png" alt="" aria-hidden="true" className="w-full h-full object-cover object-top rounded-md" />
+            <img src="/projects/tournament-tracker.jpg" alt="" aria-hidden="true" className="w-full h-full object-cover object-top rounded-md" />
           </BrowserFrame>
         </motion.div>
 
