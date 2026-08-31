@@ -1,80 +1,38 @@
-import SectionLabel from '@/components/SectionLabel'
-import { useInView } from '@/hooks/useInView'
-import { QUICK_FACTS } from '@/data'
-
-const TRAITS = ['Problem Solver', 'Clean Code', 'Team Player', 'Continuous Learner']
+import Reveal from '@/components/Reveal'
+import AmbientBackdrop from '@/components/AmbientBackdrop'
+import { ABOUT_TEXT, ABOUT_NOTE } from '@/data'
 
 export default function About() {
-  const [ref, inView] = useInView<HTMLDivElement>(0.15)
   return (
-    <section id="about" className="py-20 sm:py-24 max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
-      <SectionLabel index={1} label="About Me" />
-      <div
-        ref={ref}
-        className={`grid md:grid-cols-2 gap-10 md:gap-14 items-start transition-all duration-700 ${
-          inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}
-      >
-        {/* Left — bio */}
-        <div>
-          <p className="text-muted text-sm sm:text-base leading-relaxed mb-5">
-  I'm a Full Stack Developer working as a{' '}
-  <strong className="text-green font-semibold">
-    Software Development Engineer – I (SDE-1) at SAI Computers Private Limited, Meerut
-  </strong>
-  , since June 2025. I build scalable, user-centric web and mobile
-  applications using React, TypeScript, Node.js, Express.js, and PostgreSQL.
-</p>
-<p className="text-muted text-sm sm:text-base leading-relaxed mb-5">
-  Currently, I'm building{' '}
-  <strong className="text-white font-semibold">
-    SMRITI 3.0
-  </strong>{' '}
-  (Apr 2026 – Present), an analytics platform for UP power distribution
-  companies (PVVNL, DVVNL, UPCL). I work across the stack — building dashboards
-  and reporting modules in React/TypeScript alongside Node.js APIs, with secure
-  authentication, role-based access control, and multi-tenant architecture.
-</p>
-<p className="text-muted text-sm sm:text-base leading-relaxed mb-8">
-  Previously, I delivered end-to-end features for{' '}
-  <strong className="text-white font-semibold">
-    DAMRF – Government of Gujarat
-  </strong>
-  , a large-scale APMC digitalization project that replaced paper-based
-  workflows with a fully online approval and verification system. Beyond
-  client work, I build personal projects and take on freelance development —
-  exploring mobile apps, IoT, and side tools that push me to learn outside my
-  day-to-day stack. I focus on RBAC, REST API design, performance, and shipping
-  clean, maintainable solutions in close collaboration with backend and product
-  teams.
-</p>
-          <div className="flex flex-wrap gap-2">
-            {TRAITS.map((t) => (
-              <span
-                key={t}
-                className="font-mono text-xs text-green bg-surface2 border border-border px-3 py-1.5 rounded-md"
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-        {/* Right — quick facts card */}
-        <div className="bg-surface border border-border rounded-2xl p-5 sm:p-7">
-          <h3 className="font-mono text-sm text-green font-bold mb-5 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-green inline-block animate-pulse" />
-            Quick Facts
-          </h3>
-          <div className="flex flex-col gap-3.5">
-            {QUICK_FACTS.map(([key, val]) => (
-              <div key={key} className="flex gap-3 items-start">
-                <span className="font-mono text-green text-xs sm:text-sm min-w-[90px] sm:min-w-[110px] shrink-0">
-                  {key}:
-                </span>
-                <span className="text-white text-xs sm:text-sm">{val}</span>
-              </div>
-            ))}
-          </div>
+    <section
+      id="about"
+      className="relative overflow-hidden py-16 sm:py-20 scroll-mt-20 sm:scroll-mt-24"
+    >
+      <AmbientBackdrop variant="dark" />
+
+      <div className="relative z-10 max-w-page mx-auto px-5 sm:px-8">
+        {/* Asymmetric editorial split: the text column stops well short of
+            the full width, and the remaining margin carries a marginal
+            note rather than a second content block. */}
+        <div className="grid lg:grid-cols-12 lg:items-center gap-y-12 lg:gap-x-16">
+          <Reveal className="lg:col-span-7">
+            <p className="text-xs font-mono uppercase tracking-widest text-accent mb-6">About</p>
+            <p
+              className="font-display font-medium text-ink leading-[1.45] max-w-xl"
+              style={{ fontSize: 'clamp(20px, 2vw, 27px)' }}
+            >
+              {ABOUT_TEXT}
+            </p>
+          </Reveal>
+
+          <Reveal delay={120} className="lg:col-span-4 lg:col-start-9">
+            <div className="border-t border-border pt-5 max-w-xs">
+              <p className="text-xs font-mono uppercase tracking-widest text-muted mb-3">
+                {ABOUT_NOTE.label}
+              </p>
+              <p className="text-[15px] leading-relaxed text-soft">{ABOUT_NOTE.text}</p>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

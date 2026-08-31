@@ -1,95 +1,95 @@
-import { useEffect, useState } from 'react'
-import HeroCanvas from '@/components/HeroCanvas'
-
-const TAGS = ['React', 'TypeScript', 'Node.js', 'PostgreSQL']
+import { motion } from 'framer-motion'
+import { ArrowUpRight } from 'lucide-react'
+import HeroWindows from '@/components/artwork/HeroWindows'
+import Magnetic from '@/components/Magnetic'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { scrollToId } from '@/lib/smoothScroll'
 
 export default function Hero() {
-  const [visible, setVisible] = useState(false)
+  const reduced = useReducedMotion()
+  const ease = [0.16, 1, 0.3, 1] as const
 
-  useEffect(() => {
-    const t = setTimeout(() => setVisible(true), 100)
-    return () => clearTimeout(t)
-  }, [])
-
-  const scrollTo = (id: string) =>
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  const scrollTo = (id: string) => scrollToId(id)
 
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center pt-16"
-    >
-      {/* 3D Canvas — right side, hidden on very small screens */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[50%] h-[80%] opacity-70 pointer-events-none hidden sm:block">
-        <HeroCanvas />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 md:px-8 w-full py-12 sm:py-0">
-        <div
-          className={`transition-all duration-700 ${
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-          }`}
-        >
-          <p className="font-mono text-green text-xs sm:text-sm tracking-widest mb-4">
-            &lt; Hello World /&gt;
-          </p>
-
-          <h1
-            className="font-extrabold leading-none mb-3"
-            style={{ fontSize: 'clamp(36px, 7vw, 90px)' }}
+    <section id="top" className="relative pt-20 sm:pt-24 pb-10 sm:pb-12 scroll-mt-20 sm:scroll-mt-24">
+      <div className="max-w-page mx-auto px-5 sm:px-8 grid lg:grid-cols-[1fr_0.9fr] gap-10 lg:gap-12 items-center">
+        <div>
+          <motion.p
+            initial={reduced ? undefined : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease }}
+            className="inline-flex items-center gap-2 text-xs font-mono text-muted mb-5"
           >
-            <span className="text-white">Priyansh</span>
-            <br />
-            <span className="gradient-text">Rana</span>
-          </h1>
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-accent/40" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+            </span>
+            Available for select freelance work
+          </motion.p>
 
-          <p className="font-mono text-muted text-sm sm:text-base mb-2">
-            SDE-1 @ Sai Computers Limited
-          </p>
-          <p className="font-mono text-muted/60 text-xs sm:text-sm mb-4">
-            ~1 year of professional experience
-          </p>
+          <motion.h1
+            initial={reduced ? undefined : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.06, ease }}
+            className="font-display font-bold text-ink leading-[1.03] text-balance"
+            style={{ fontSize: 'clamp(40px, 6.5vw, 76px)' }}
+          >
+            Hey, I'm Priyansh.
+          </motion.h1>
 
-          <p className="text-muted text-sm sm:text-lg leading-relaxed max-w-xl mb-8">
-            Full Stack Developer building modern, scalable web applications.
-            Passionate about clean code, great UX, and continuous learning.
-          </p>
+          <motion.p
+            initial={reduced ? undefined : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.14, ease }}
+            className="mt-5 text-lg sm:text-xl text-ink max-w-lg leading-snug"
+          >
+            Full-stack developer building web apps, side projects, and things people actually use.
+          </motion.p>
 
-          {/* CTA buttons */}
-          <div className="flex gap-3 sm:gap-4 flex-wrap mb-8 sm:mb-10">
-            <button
-              onClick={() => scrollTo('projects')}
-              className="px-5 sm:px-7 py-2.5 sm:py-3 bg-green text-bg font-bold font-mono text-xs sm:text-sm rounded-xl hover:bg-green-dark transition-all duration-200 hover:scale-105 active:scale-95"
-            >
-              View Projects →
-            </button>
-            <button
-              onClick={() => scrollTo('contact')}
-              className="px-5 sm:px-7 py-2.5 sm:py-3 border border-green/30 text-green font-mono text-xs sm:text-sm rounded-xl hover:border-green hover:bg-green/5 transition-all duration-200"
-            >
-              Contact Me
-            </button>
-          </div>
+          <motion.p
+            initial={reduced ? undefined : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease }}
+            className="mt-3 text-sm text-muted max-w-md"
+          >
+            Currently working with React, Next.js, TypeScript, Node.js — and whatever the project needs.
+          </motion.p>
 
-          {/* Tech tags */}
-          <div className="flex flex-wrap gap-2 sm:gap-3">
-            {TAGS.map((tag) => (
-              <span
-                key={tag}
-                className="font-mono text-xs text-green bg-green-dim border border-green/20 px-2.5 sm:px-3 py-1 rounded"
+          <motion.div
+            initial={reduced ? undefined : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.28, ease }}
+            className="mt-8 flex flex-wrap items-center gap-4"
+          >
+            <Magnetic>
+              <button
+                onClick={() => scrollTo('work')}
+                className="inline-flex items-center gap-2 bg-ink text-bg px-6 py-3 rounded-full text-sm font-medium hover:bg-accent hover:text-ink transition-colors duration-300"
               >
-                {tag}
-              </span>
-            ))}
-          </div>
+                See my work
+                <ArrowUpRight size={16} />
+              </button>
+            </Magnetic>
+            <Magnetic strength={0.25}>
+              <button
+                onClick={() => scrollTo('contact')}
+                className="inline-flex items-center gap-2 text-sm font-medium text-ink border-b border-white/25 hover:border-ink pb-1 transition-colors duration-200"
+              >
+                Let's talk
+              </button>
+            </Magnetic>
+          </motion.div>
         </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-        <span className="font-mono text-xs text-muted">scroll</span>
-        <div className="w-px h-8 bg-gradient-to-b from-green/60 to-transparent" />
+        <motion.div
+          initial={reduced ? undefined : { opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.2, ease }}
+          className="hidden sm:block"
+        >
+          <HeroWindows />
+        </motion.div>
       </div>
     </section>
   )

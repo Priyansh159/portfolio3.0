@@ -3,88 +3,165 @@
 @tailwind utilities;
 
 @layer base {
+  /* Design tokens — single source of truth for the whole colour system.
+     All stored as RGB channels so Tailwind's alpha modifiers (accent/50,
+     paper-ink/70 …) still resolve. Two surfaces, one family: deep charcoal
+     and muted warm stone, deliberately close in weight so the light bands
+     read as an editorial surface inside a dark site, not "light mode". */
   :root {
-    --green: #00ff87;
-    --green-dark: #00cc6a;
-    --green-dim: rgba(0, 255, 135, 0.13);
+    --accent: 91 108 255;
+
+    /* Dark surfaces */
+    --dark-surface: 17 18 20; /* #111214 */
+    --dark-card: 24 25 28; /* #18191C */
+    --dark-frame: 31 32 36; /* #1F2024 */
+    --dark-text: 237 236 231; /* #EDECE7 — off-white, never pure white */
+    --dark-soft: 176 176 170;
+    --dark-muted: 138 139 145;
+
+    /* Light surfaces */
+    --light-surface: 232 230 223; /* #E8E6DF — warm stone */
+    --light-card: 223 221 213;
+    --light-text: 36 36 32; /* #242420 — soft charcoal, never pure black */
+    --light-soft: 74 74 68;
+    --light-muted: 106 106 99;
   }
 
+  /* Every accent-bearing element eases to the new colour together, so
+     switching reads as one deliberate system-wide response. */
+  a,
+  button,
+  input,
+  textarea,
+  svg,
+  span,
+  p,
+  h1,
+  h2,
+  h3 {
+    transition-property: color, background-color, border-color, fill, stroke;
+    transition-duration: 260ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a,
+    button,
+    input,
+    textarea,
+    svg,
+    span,
+    p,
+    h1,
+    h2,
+    h3 {
+      transition-duration: 0ms;
+    }
+  }
+
+  /* Lenis eases the real scroll position itself; native smooth-scroll would
+     fight its RAF loop, so leave this on auto. */
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
   }
 
   body {
-    @apply text-white font-head overflow-x-hidden;
-    background: #020408;
-  }
-
-  ::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #020408;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-green-dark rounded;
+    @apply text-ink font-sans overflow-x-hidden;
+    background: rgb(var(--dark-surface));
   }
 
   ::selection {
-    background-color: rgba(0, 255, 135, 0.25);
-    color: #00ff87;
+    background-color: rgb(var(--accent) / 0.35);
+    color: rgb(var(--dark-text));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--dark-surface));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--dark-frame));
+    border-radius: 4px;
   }
 }
 
 @layer utilities {
-  .text-green-glow {
-    text-shadow: 0 0 20px rgba(0, 255, 135, 0.5);
+  .text-balance {
+    text-wrap: balance;
   }
 
-  .border-glow {
-    box-shadow: 0 0 20px rgba(0, 255, 135, 0.15);
+  .cursor-none-desktop {
+    cursor: none;
   }
 
-  .gradient-text {
-    background: linear-gradient(135deg, #00ff87, #00cc6a);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .glass {
-    background: rgba(4, 8, 16, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+  .cursor-none-desktop a,
+  .cursor-none-desktop button {
+    cursor: none;
   }
 }
 
-/* Galaxy nebula gradients scattered across the page */
-.space-bg {
-  background: #020408;
-  position: relative;
+/* --- Ambient section atmosphere -------------------------------------------
+   Two very large, very faint radial fields drifting on long cycles. They sit
+   behind section content at low alpha so a section never reads as a flat
+   rectangle, but nothing is perceptible as "an animation running". Colour is
+   derived from --accent so it follows the accent token. */
+@keyframes ambient-drift-a {
+  0%,
+  100% {
+    transform: translate3d(-5%, -3%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(5%, 4%, 0) scale(1.14);
+  }
 }
 
-.space-bg::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    /* Top-right nebula - purple/blue */
-    radial-gradient(ellipse 600px 400px at 85% 8%, rgba(40, 10, 80, 0.35) 0%, transparent 70%),
-    /* Center-left nebula - green tint */
-    radial-gradient(ellipse 500px 500px at 10% 35%, rgba(0, 255, 135, 0.03) 0%, transparent 60%),
-    /* Mid-right nebula - deep blue */
-    radial-gradient(ellipse 700px 350px at 90% 45%, rgba(0, 30, 80, 0.25) 0%, transparent 65%),
-    /* Bottom-left nebula - purple/pink */
-    radial-gradient(ellipse 550px 400px at 5% 75%, rgba(60, 10, 90, 0.2) 0%, transparent 60%),
-    /* Bottom-center nebula - teal */
-    radial-gradient(ellipse 600px 300px at 50% 90%, rgba(0, 80, 100, 0.15) 0%, transparent 60%),
-    /* Very subtle overall green tint */
-    radial-gradient(ellipse 100% 100% at 50% 50%, rgba(0, 255, 135, 0.01) 0%, transparent 70%);
+@keyframes ambient-drift-b {
+  0%,
+  100% {
+    transform: translate3d(4%, 5%, 0) scale(1.1);
+  }
+  50% {
+    transform: translate3d(-4%, -5%, 0) scale(1);
+  }
+}
+
+.ambient-a {
+  animation: ambient-drift-a 38s ease-in-out infinite;
+  will-change: transform;
+}
+
+.ambient-b {
+  animation: ambient-drift-b 46s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Static film grain — breaks up flat fills without any motion cost. */
+.ambient-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-a,
+  .ambient-b {
+    animation: none;
+  }
 }

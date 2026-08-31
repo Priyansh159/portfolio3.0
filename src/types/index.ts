@@ -1,29 +1,3 @@
-export interface Project {
-  title: string
-  tag: string
-  desc: string
-  github: string | null
-  live: string | null
-  color: string
-  tech: string[]
-  inProgress?: boolean
-}
-
-export interface Skill {
-  name: string
-  pct: number
-  color: string
-}
-
-export interface Experience {
-  role: string
-  company: string
-  period: string
-  type: string
-  desc: string
-  tech: string[]
-}
-
 export interface NavItem {
   label: string
   id: string
@@ -34,4 +8,24 @@ export interface SocialLink {
   val: string
   href: string
   icon: string
+}
+
+export interface Experience {
+  role: string
+  company: string
+  period: string
+  blurb: string
+}
+
+export type ProjectStatus = 'shipped' | 'in-development'
+
+export interface Project {
+  slug: string
+  title: string
+  blurb: string
+  stack: string[]
+  image: string
+  live: string | null
+  github: string | null
+  status: ProjectStatus
 }

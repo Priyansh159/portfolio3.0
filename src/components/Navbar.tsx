@@ -1,93 +1,114 @@
-import { useState } from 'react'
-import { Menu, X } from 'lucide-react'
-import { NAV_ITEMS } from '@/data'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ArrowUpRight, Menu, X } from 'lucide-react'
+import { NAV_ITEMS, RESUME_URL } from '@/data'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
+import { scrollToId } from '@/lib/smoothScroll'
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const ids = NAV_ITEMS.map((n) => n.id)
-  const activeId = useScrollSpy(ids)
+  const activeId = useScrollSpy(ids, 110)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
     setMobileOpen(false)
+    scrollToId(id)
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border h-14 sm:h-16 flex items-center justify-between px-4 sm:px-6 md:px-8">
-      {/* Logo */}
-      <button
-        onClick={() => scrollTo('home')}
-        className="flex items-center gap-2 sm:gap-3 group"
-      >
-        <div className="w-7 h-7 sm:w-8 sm:h-8 bg-green rounded-full flex items-center justify-center">
-          <span className="text-bg font-mono font-bold text-xs">PR</span>
-        </div>
-        <span className="font-mono font-bold text-green text-xs sm:text-sm hidden sm:block">
-          Priyansh Rana
-        </span>
-      </button>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-bg/90 backdrop-blur-sm border-b border-border' : 'border-b border-transparent'
+      }`}
+    >
+      <div className="max-w-page mx-auto flex items-center justify-between h-16 sm:h-[4.25rem] px-5 sm:px-8">
+        <button onClick={() => scrollTo('top')} className="flex items-center gap-2.5 shrink-0" aria-label="Back to top">
+          <span className="w-8 h-8 rounded-full bg-ink text-bg font-display font-bold text-xs flex items-center justify-center">
+            PR
+          </span>
+        </button>
 
-      {/* Desktop nav */}
-      <div className="hidden md:flex items-center gap-4 lg:gap-6">
-        {NAV_ITEMS.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => scrollTo(item.id)}
-            className={`font-mono text-xs transition-colors duration-200 ${
-              activeId === item.id
-                ? 'text-green'
-                : 'text-muted hover:text-green'
-            }`}
-          >
-            {item.label}
-          </button>
-        ))}
-        <a
-          href="/PriyanshRanaResume.pdf"
-          target="_blank"
-          rel="noreferrer"
-          download
-          className="font-mono text-xs px-4 py-2 border border-green/40 text-green rounded-lg hover:bg-green/10 transition-colors duration-200"
-        >
-          Resume ↗
-        </a>
-      </div>
-
-      {/* Mobile hamburger */}
-      <button
-        className="md:hidden text-muted hover:text-green transition-colors"
-        onClick={() => setMobileOpen((p) => !p)}
-        aria-label="Toggle menu"
-      >
-        {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-      </button>
-
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="absolute top-14 sm:top-16 left-0 right-0 bg-surface border-b border-border flex flex-col px-4 sm:px-6 py-4 gap-4 md:hidden">
+        <nav className="hidden md:flex items-center gap-7" aria-label="Primary">
           {NAV_ITEMS.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className={`font-mono text-sm text-left transition-colors duration-200 ${
-                activeId === item.id ? 'text-green' : 'text-muted'
-              }`}
+              className="relative py-1 text-sm text-muted hover:text-ink transition-colors duration-200"
             >
               {item.label}
+              <span
+                className={`absolute left-0 -bottom-0.5 h-px bg-accent transition-all duration-300 ${
+                  activeId === item.id ? 'w-full' : 'w-0'
+                }`}
+              />
             </button>
           ))}
+        </nav>
+
+        <div className="hidden md:flex items-center gap-5">
           <a
-            href="/PriyanshRanaResume.pdf"
+            href={RESUME_URL}
             target="_blank"
             rel="noreferrer"
-            download
-            className="font-mono text-sm text-green"
+            className="inline-flex items-center gap-1.5 text-sm text-ink border-b border-white/25 hover:border-ink pb-0.5 transition-colors duration-200"
           >
-            Resume ↗
+            Resume
+            <ArrowUpRight size={14} />
           </a>
         </div>
-      )}
-    </nav>
+
+        <button
+          className="md:hidden text-ink p-1"
+          onClick={() => setMobileOpen((p) => !p)}
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileOpen}
+        >
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden bg-bg border-b border-border overflow-hidden"
+          >
+            <div className="flex flex-col px-5 py-4 gap-1">
+              {NAV_ITEMS.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollTo(item.id)}
+                  className={`text-left py-3 text-base font-display font-medium transition-colors duration-200 ${
+                    activeId === item.id ? 'text-accent' : 'text-ink'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+              <a
+                href={RESUME_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="py-3 text-base font-display font-medium text-ink inline-flex items-center gap-1.5"
+              >
+                Resume
+                <ArrowUpRight size={16} />
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   )
 }
